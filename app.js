@@ -1,23 +1,16 @@
 var $input = $('#input');
 var $output = $('#output')
 
+$(window).keypress(change)
 
-$input.bind("input", change)
-
-var oldValue = $input.val();
 function change(evt) {
-  var text = $input.val();
-  var obj = makeObj(text);
+  var newLetter = String.fromCharCode(evt.which);
+  spanifyAdd(newLetter, $output);
+
+  var obj = makeObj($('#output').text());
   var arr = makeArray(obj);
   arr = fixRepeats(arr);
-  var newValue = text.slice(0, text.length - 1);
-  if (oldValue == newValue) {
-    spanifyAdd(text.last(), $output);
-  } else {
-    spanifyReset(text, $output);
-  }
   colorize(arr);
-  oldValue = text;
 };
 
 function makeObj(str) {
