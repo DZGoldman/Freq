@@ -1,5 +1,5 @@
 span{
-  color: white;
+  color: rgb(255, 255, 255);
   opacity: 1;
   font-size: 50px;
   /*display: inline-block*/
@@ -17,4 +17,13 @@ span{
 
 body{
   background: black
+}
+
+.other{
+  opacity: 0.5
+}
+
+#intro{
+  color: white;
+  font-size:
 }
