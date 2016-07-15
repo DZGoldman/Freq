@@ -12,6 +12,7 @@ $(window).keydown(function (evt) {
 
 $(window).keypress(change)
 
+
 function change(evt) {
   console.log(evt.which);
   var newLetter = String.fromCharCode(evt.which);
@@ -100,9 +101,9 @@ function spanifyAdd(char, $target) {
 
 // Helper methods for objects and arrays:
 
-Object.prototype.onlyKey = function() {
-  return Object.keys(this)[0]
-};
+// Object.prototype.onlyKey = function() {
+//   return Object.keys(this)[0]
+// };
 
 Object.prototype.onlyValue = function() {
   return this[this.onlyKey()]

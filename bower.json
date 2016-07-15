@@ -1,0 +1,19 @@
+{
+  "name": "Freq",
+  "authors": [
+    "Daniel Goldman <dzgoldman@wesleyan.edu>"
+  ],
+  "description": "",
+  "main": "",
+  "license": "MIT",
+  "homepage": "",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+  "jquery": "^2.2.3"}
+}
