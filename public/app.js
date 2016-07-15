@@ -51,7 +51,7 @@ function makeArray(obj) {
     };
   };
   objArray.sort(function(a, b) {
-    return a.onlyValue() > b.onlyValue();
+    return onlyValue(a) > onlyValue(b);
   })
   return objArray.reverse();
 };
@@ -59,16 +59,16 @@ function makeArray(obj) {
 //Combine repeats of freqency so they get same opacity
 function fixRepeats(objArray) {
   if(objArray.length==0) return false;
-  var newArray = [[objArray[0].onlyKey()]];
-  var prevVal = objArray[0].onlyValue();
+  var newArray = [[onlyKey(objArray[0])]];
+  var prevVal = onlyValue(objArray[0]);
   for (var i = 1; i < objArray.length; i++) {
     var obj = objArray[i];
-    if (obj.onlyValue() == prevVal) {
-      newArray.last().push(obj.onlyKey())
+    if (onlyValue(obj) == prevVal) {
+      newArray.last().push(onlyKey(obj))
     }else{
-      newArray.push([obj.onlyKey()]);
+      newArray.push([onlyKey(obj)]);
     }
-    prevVal = obj.onlyValue();
+    prevVal = onlyValue(obj);
   }
   return newArray;
 }
@@ -101,12 +101,12 @@ function spanifyAdd(char, $target) {
 
 // Helper methods for objects and arrays:
 
-// Object.prototype.onlyKey = function() {
-//   return Object.keys(this)[0]
-// };
+function onlyKey(obj) {
+  return Object.keys(obj)[0]
+};
 
-Object.prototype.onlyValue = function() {
-  return this[this.onlyKey()]
+function onlyValue(obj) {
+  return obj[onlyKey(obj)]
 }
 
 Array.prototype.last = function () {

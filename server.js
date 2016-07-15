@@ -18,7 +18,8 @@ app.use(express.static(__dirname + '/public'));
 app.post('/alchemy', function(req, res) {
   console.log('hellothere');
   console.log(req.body.text);
-  var alchemy = new AlchemyAPI(process.env.PORT);
+  var alchemy = new AlchemyAPI(process.env.KEY);
+
   alchemy.sentiment(req.body.text, {}, function(err, response) {
     if (err) throw err;
 
@@ -28,11 +29,16 @@ app.post('/alchemy', function(req, res) {
     // Do something with data
   })
 })
-//
-// app.get('/', function(req, res){
-//   res.sendFile(__dirname+'/public/index.html')
-// });
 
+app.get('/limit', function (req, res) {
+  var alchemy = new AlchemyAPI(process.env.KEY);
+  alchemy.apiKeyInfo({}, function(err, response) {
+    if (err) throw err;
+    // Do something with data
+    console.log('Status:', response.status, 'Consumed:', response.consumedDailyTransactions, 'Limit:', response.dailyTransactionLimit);
+    res.send(response)
+  });
+})
 
 app.listen(3000, function() {
   console.info('Listening on  port ' + process.env.PORT)
