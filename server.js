@@ -40,6 +40,6 @@ app.get('/limit', function (req, res) {
   });
 })
 
-app.listen(3000, function() {
+app.listen(process.env.PORT, function() {
   console.info('Listening on  port ' + process.env.PORT)
 })
