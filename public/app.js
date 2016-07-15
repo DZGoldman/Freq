@@ -7,14 +7,13 @@ $(window).keydown(function (evt) {
     var arr = makeArray(obj);
     arr = fixRepeats(arr);
     colorize(arr);
+    evt.preventDefault();
   }
 })
 
 $(window).keypress(change)
 
-
 function change(evt) {
-  console.log(evt.which);
   var newLetter = String.fromCharCode(evt.which);
   spanifyAdd(newLetter, $output);
   var obj = makeObj($('#output').text());
@@ -80,7 +79,7 @@ function colorize(objArray) {
     var arr = objArray[i];
     for (var j = 0; j < arr.length; j++) {
       var char = arr[j]
-      $('.' + char).css('opacity', 1 / (i + 1));
+      $('.' + char).css('opacity', 1 / (i + 1) +0.05);
     };
   }
 }
