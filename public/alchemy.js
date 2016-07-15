@@ -1,13 +1,18 @@
-setInterval(sentimize, 5000)
+$('#intro').fadeOut(7000)
+
+
+setTimeout(sentimize, 3000)
+setInterval(sentimize, 6000)
+
+
 var counter = 0
 function sentimize() {
-  rateLimit();
   counter++
-  console.log(counter);
-  if (counter > 20) return false
+  if (counter >16) return false
 
   getSentiment($output.text())
     .done(function(data) {
+      if (data.limit_reached) limitReached()
       var score = data.score
       var color = getRGB(score)
       sentColorize(color)
@@ -41,25 +46,27 @@ function getRGB(score) {
 
 function sentColorize(color) {
   $('span').each(function(index, $letter) {
-    setTimeout(blacken, 30 * index)
+    setTimeout(blacken, 25 * index)
     function blacken() {
       $($letter).animate({
           color: 'black'
-        }, 150,
+        }, 30,
         colorize)
     }
     function colorize() {
       $($letter).animate({
         color: color
-      }, 500)
+      }, 400)
     }
   })
 }
 
 function rateLimit() {
   $.get('limit').done(function(data) {
-    if (data) {
-      console.log(data);
-    };
+    console.log(data);
   })
+}
+
+function limitReached() {
+  console.log('api limit reached');
 }

@@ -2,7 +2,6 @@ span{
   color: white;
   opacity: 1;
   font-size: 50px;
-  /*display: inline-block*/
 }
 
 #input{
@@ -11,8 +10,7 @@ span{
 }
 
 #output{
-  position: fixed;
-  width: 95%;
+  margin: 40px;
 }
 
 body{
@@ -25,5 +23,56 @@ body{
 
 #intro{
   color: white;
-  font-size:
+  font-size: 20px;
+  margin: 20px;
+  opacity: 0.8;
+  position: absolute;
+}
+
+#info{
+  color: white;
+  width: 300px;
+  font-size: 20px;
+  position: absolute;
+  right: 30px;
+  opacity: 0;
+  font-family: sans-serif;
+}
+
+#q{
+  color: white;
+  font-size: 50px;
+  position: absolute;
+  right: 15px
+}
+
+#q:hover ~ #info{
+  opacity: 0.8;
+  -webkit-transition: opacity 200ms ease-out
+}
+
+#q:hover ~ #output{
+  opacity: 0.1 !important;
+  -webkit-transition: opacity 200ms ease-out
+}
+
+.scaler {
+  display: inline
+}
+
+.neg{
+  color: rgb(255, 0, 0);
+}
+
+.pos{
+  color: rgb(0, 255, 0);
+}
+
+.freq{
+  opacity: 1 !important
+}
+
+.infreq{
+  opacity: 0.2
+
 }

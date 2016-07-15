@@ -79,7 +79,7 @@ function colorize(objArray) {
     var arr = objArray[i];
     for (var j = 0; j < arr.length; j++) {
       var char = arr[j]
-      $('.' + char).css('opacity', 1 / (i + 1) +0.05);
+      $('.' + char).css('opacity', 1 / (i + 1) +0.1);
     };
   }
 }
@@ -99,7 +99,6 @@ function spanifyAdd(char, $target) {
 }
 
 // Helper methods for objects and arrays:
-
 function onlyKey(obj) {
   return Object.keys(obj)[0]
 };
