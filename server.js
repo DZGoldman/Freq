@@ -15,6 +15,7 @@ app.use(bodyParser.urlencoded({
 app.use(morgan('combined'));
 app.use(express.static(__dirname + '/public'));
 
+// receives text, send sentiment data
 app.post('/alchemy', function(req, res) {
   var alchemy = new AlchemyAPI(process.env.KEY);
   alchemy.sentiment(req.body.text, {}, function(err, response) {
@@ -27,10 +28,9 @@ app.post('/alchemy', function(req, res) {
     var sentiment = response.docSentiment;
     res.send(sentiment)
   })
-
-
 })
 
+// show rate limit
 app.get('/limit', function(req, res) {
   var alchemy = new AlchemyAPI(process.env.KEY);
   alchemy.apiKeyInfo({}, function(err, response) {

@@ -1,5 +1,6 @@
 var $output = $('#output')
 
+// delete-character functionality
 $(window).keydown(function (evt) {
   if (evt.which == 8) {
     $output.children().last().remove();
@@ -13,6 +14,7 @@ $(window).keydown(function (evt) {
 
 $(window).keypress(change)
 
+// all other keys: chain functions, triggers the rest
 function change(evt) {
   var newLetter = String.fromCharCode(evt.which);
   spanifyAdd(newLetter, $output);
