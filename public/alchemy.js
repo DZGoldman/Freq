@@ -8,10 +8,9 @@ var counter = 0
 function sentimize() {
   counter++
   if (counter >16) return false
-
+  if ($output.text().trim().length ==0) return false
   getSentiment($output.text())
     .done(function(data) {
-      console.log(data);
       if (data.limit_reached){
          return limitReached()
        }
