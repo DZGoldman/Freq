@@ -1,8 +1,7 @@
 $('#intro').fadeOut(7000)
 
-
-// setTimeout(sentimize, 3000)
-// setInterval(sentimize, 6000)
+setTimeout(sentimize, 2500)
+setInterval(sentimize, 5000)
 
 
 var counter = 0
