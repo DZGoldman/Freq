@@ -17,21 +17,21 @@ app.use(express.static(__dirname + '/public'));
 
 app.post('/alchemy', function(req, res) {
   var alchemy = new AlchemyAPI(process.env.KEY);
-  alchemy.apiKeyInfo({}, function(err, response) {
+  alchemy.sentiment(req.body.text, {}, function(err, response) {
     if (err) throw err;
-    if(response.status == 'OK'){
-      alchemy.sentiment(req.body.text, {}, function(err, response) {
-        if (err) throw err;
-        var sentiment = response.docSentiment;
-        res.send(sentiment)
+    if (response.status == 'ERROR') {
+      res.send({
+        limit_reached: true
       })
-    }else{
-      res.send({limit_reached: true})
     }
+    var sentiment = response.docSentiment;
+    res.send(sentiment)
   })
+
+
 })
 
-app.get('/limit', function (req, res) {
+app.get('/limit', function(req, res) {
   var alchemy = new AlchemyAPI(process.env.KEY);
   alchemy.apiKeyInfo({}, function(err, response) {
     if (err) throw err;

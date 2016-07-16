@@ -74,5 +74,15 @@ body{
 
 .infreq{
   opacity: 0.2
+}
+
+#limit{
+  position: absolute;
+  bottom: 20px;
+  left: 50px;
+  color: white;
+  opacity: 0.8;
+  display: none;
+  color: rgb(235, 120, 100)
 
 }

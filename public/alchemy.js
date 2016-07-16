@@ -1,8 +1,8 @@
 $('#intro').fadeOut(7000)
 
 
-setTimeout(sentimize, 3000)
-setInterval(sentimize, 6000)
+// setTimeout(sentimize, 3000)
+// setInterval(sentimize, 6000)
 
 
 var counter = 0
@@ -12,7 +12,10 @@ function sentimize() {
 
   getSentiment($output.text())
     .done(function(data) {
-      if (data.limit_reached) limitReached()
+      console.log(data);
+      if (data.limit_reached){
+         return limitReached()
+       }
       var score = data.score
       var color = getRGB(score)
       sentColorize(color)
@@ -68,5 +71,5 @@ function rateLimit() {
 }
 
 function limitReached() {
-  console.log('api limit reached');
+  $('#limit').show()
 }
