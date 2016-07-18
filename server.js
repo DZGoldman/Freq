@@ -26,6 +26,8 @@ app.post('/alchemy', function(req, res) {
       })
     }
     var sentiment = response.docSentiment;
+    sentiment.length = req.body.text.length
+    console.log(sentiment);
     res.send(sentiment)
   })
 })

@@ -1,14 +1,18 @@
 // All alchemy functionality (getting seniment and coloring accordingly) goes here
 $('#intro').fadeOut(7000)
 
-setTimeout(sentimize, 2500)
-setInterval(sentimize, 5000)
+// setTimeout(sentimize, 2500)
+// setInterval(sentimize, 5000)
 
 
 var counter = 0
 // Main function; starts the chain for all the others
 function sentimize() {
-  var text = $output.text()
+  var $targets = $('span')
+  var allText = $output.text()
+  var sentences = allText.split(/[\\.!\?]/).filter(function(el) {return el.length != 0});
+
+  var text = sentences.last()
   // only run 16 per page visit
   counter++
   if (counter >16) return false
@@ -16,15 +20,16 @@ function sentimize() {
   if (text.trim().length ==0) return false
   getSentiment(text)
     .done(function(data) {
+
       if (data.limit_reached){
          return limitReached()
        }
       var score = data.score
       var color = getRGB(score)
-      sentColorize(color)
+        console.log('datalengthin callback',data.length);
+      sentColorize(color, data.length )
     })
     .fail(function(data) {
-      console.log(data);
     })
 }
 //get sentiment data from server (returns promise)
@@ -48,13 +53,19 @@ function getRGB(score) {
     var scale = Math.floor(255 + (255 * score));
     var color = 'rgb(255,' + scale + ',' + scale + ')'
   }
-  sentColorize(color)
+  return color
 }
 
 // Animation for changing text color, uses Jquery UI
-function sentColorize(color) {
+function sentColorize(color, len) {
+  // if (!len) {
+  //   console.log('whyyyy');
+  //   return false
+  // }
+  console.log('length in colorize', len);
+  var $targets = $($("span").get().reverse()).slice(0, len+1)
   // for each letter
-  $('span').each(function(index, $letter) {
+  $($targets.get().reverse()).each(function(index, $letter) {
     // at evenly spaced time increments
     setTimeout(blacken, 25 * index)
     // first make text black/invisible
@@ -76,7 +87,7 @@ function sentColorize(color) {
 // get rate limit (just to use in browswer window)
 function rateLimit() {
   $.get('limit').done(function(data) {
-    console.log(data);
+    console.log('ratelimit', data);
   })
 }
 

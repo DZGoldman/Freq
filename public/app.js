@@ -2,7 +2,10 @@ var $output = $('#output')
 
 // delete-character functionality
 $(window).keydown(function (evt) {
-  if (evt.which == 8) {
+  var ascii =evt.which
+  console.log(ascii);
+  if (ascii== 8) {
+    console.log(ascii);
     $output.children().last().remove();
     var obj = makeObj($('#output').text());
     var arr = makeArray(obj);
@@ -12,7 +15,13 @@ $(window).keydown(function (evt) {
   }
 })
 
-$(window).keypress(change)
+$(window).keypress(function (e) {
+  change(e)
+  if ([33,46,63].includes(e.which)) {
+    sentimize()
+  }
+
+})
 
 // all other keys: chain functions, triggers the rest
 function change(evt) {
