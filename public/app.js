@@ -3,9 +3,7 @@ var $output = $('#output')
 // delete-character functionality
 $(window).keydown(function (evt) {
   var ascii =evt.which
-  console.log(ascii);
   if (ascii== 8) {
-    console.log(ascii);
     $output.children().last().remove();
     var obj = makeObj($('#output').text());
     var arr = makeArray(obj);

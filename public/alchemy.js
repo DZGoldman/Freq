@@ -9,9 +9,10 @@ function sentimize() {
   var sentences = allText.split(/[\\.!\?]/).filter(function(el) {return el.length != 0});
 
   var text = sentences.last();
-  // only run 16 per page visit
-  // counter++
-  // if (counter >16) return false
+  // only run 20 times per page visit
+  counter++
+  if (counter >20) return false
+
   // don't run if there is no text
   if (text.trim().length ==0) return false
   getSentiment(text)
@@ -22,7 +23,6 @@ function sentimize() {
        }
       var score = data.score
       var color = getRGB(score)
-        console.log('datalengthin callback',data.length);
       sentColorize(color, data.length )
     })
     .fail(function(data) {
@@ -55,7 +55,6 @@ function getRGB(score) {
 
 // Animation for changing text color, uses Jquery UI
 function sentColorize(color, len) {
-  console.log('length in colorize', len);
   var $targets = $($("span").get().reverse()).slice(0, len+1)
   // for each letter
   $($targets.get().reverse()).each(function(index, $letter) {

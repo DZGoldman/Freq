@@ -20,7 +20,6 @@ app.post('/alchemy', function(req, res) {
   var alchemy = new AlchemyAPI(process.env.KEY);
   var text = req.body.text;
   alchemy.sentiment(text, {}, function(err, response) {
-    console.log(response);
     if (err) throw err;
     if (response.status == 'ERROR' && response.statusInfo == 'daily-transaction-limit-exceeded') {
       res.send({
