@@ -1,10 +1,6 @@
 // All alchemy functionality (getting seniment and coloring accordingly) goes here
 $('#intro').fadeOut(7000)
 
-// setTimeout(sentimize, 2500)
-// setInterval(sentimize, 5000)
-
-
 var counter = 0
 // Main function; starts the chain for all the others
 function sentimize() {
@@ -12,17 +8,17 @@ function sentimize() {
   var allText = $output.text()
   var sentences = allText.split(/[\\.!\?]/).filter(function(el) {return el.length != 0});
 
-  var text = sentences.last()
+  var text = sentences.last();
   // only run 16 per page visit
-  counter++
-  if (counter >16) return false
+  // counter++
+  // if (counter >16) return false
   // don't run if there is no text
   if (text.trim().length ==0) return false
   getSentiment(text)
     .done(function(data) {
 
-      if (data.limit_reached){
-         return limitReached()
+      if (data.error){
+         return sentimentError(data)
        }
       var score = data.score
       var color = getRGB(score)
@@ -30,6 +26,7 @@ function sentimize() {
       sentColorize(color, data.length )
     })
     .fail(function(data) {
+      console.log(data);
     })
 }
 //get sentiment data from server (returns promise)
@@ -58,10 +55,6 @@ function getRGB(score) {
 
 // Animation for changing text color, uses Jquery UI
 function sentColorize(color, len) {
-  // if (!len) {
-  //   console.log('whyyyy');
-  //   return false
-  // }
   console.log('length in colorize', len);
   var $targets = $($("span").get().reverse()).slice(0, len+1)
   // for each letter
@@ -92,6 +85,11 @@ function rateLimit() {
 }
 
 // show message about rate limit being reached
-function limitReached() {
-  $('#limit').show()
+function sentimentError(data) {
+  if (data.limit_reached) {
+      $('#limit').show()
+  }else if( data.unsupported_text_language){
+    console.log('unsupported', data);
+  }
+
 }
